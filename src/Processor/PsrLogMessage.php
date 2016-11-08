@@ -39,9 +39,11 @@ class PsrLogMessage implements ProcessorInterface
             return $event;
         }
 
+        /** @var array $eventContext */
+        $eventContext = $event['context'];
         $replacements = [];
 
-        foreach ($event['context'] as $key => $value) {
+        foreach ($eventContext as $key => $value) {
             $replacements['{' . $key . '}'] = $value;
         }
 

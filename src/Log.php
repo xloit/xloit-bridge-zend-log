@@ -120,6 +120,9 @@ class Log
      * @param PhpException $e
      *
      * @return boolean
+     * @throws \Zend\Log\Exception\InvalidArgumentException
+     * @throws \Zend\Log\Exception\InvalidArgumentException
+     * @throws \Zend\Log\Exception\RuntimeException
      */
     public static function exception($title, PhpException $e)
     {
@@ -128,7 +131,7 @@ class Log
         $content = (string) $title . PHP_EOL . 'Exception of type \'' . get_class($e) . '\': ' . $exceptionMessage;
 
         // need to add check if the log verbosity is info or debug. Look at old code
-        self::err($content);
+        self::$logger->exception(new PhpException($content, null, $e));
 
         return true;
     }
@@ -138,6 +141,9 @@ class Log
      *
      * @param string $message
      * @param array  $extras
+     * @throws \Zend\Log\Exception\InvalidArgumentException
+     * @throws \Zend\Log\Exception\InvalidArgumentException
+     * @throws \Zend\Log\Exception\RuntimeException
      */
     public static function err($message, array $extras = [])
     {

@@ -77,7 +77,7 @@ class LoggerFactory extends AbstractFactory
         }
 
         if ($this->getLogger()->getWriters()->count() === 0) {
-            return $this->getLogger()->addWriter(new Noop());
+            $this->getLogger()->addWriter(new Noop());
         }
 
         return $this->getLogger();

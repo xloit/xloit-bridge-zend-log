@@ -25,19 +25,42 @@ use Zend\Log\Logger as ZendLogger;
  *
  * @package Xloit\Bridge\Zend\Log
  */
-class Logger extends ZendLogger
+class Logger extends ZendLogger implements LoggerInterface
 {
     /**
-     * Log an exception triggered by ZF2 for administrative purposes.
+     * Runtime errors that do not require immediate action but should typically
+     * be logged and monitored.
      *
-     * @param Throwable $error
+     * @param string             $message
+     * @param array|\Traversable $extra
      *
      * @return static
      * @throws \Zend\Log\Exception\InvalidArgumentException
      * @throws \Zend\Log\Exception\InvalidArgumentException
      * @throws \Zend\Log\Exception\RuntimeException
      */
-    public function exception(Throwable $error)
+    public function err($message, $extra = [])
+    {
+        if ($message instanceof Throwable) {
+            return $this->exception($message, $extra);
+        }
+
+        /** @noinspection PhpIncompatibleReturnTypeInspection */
+        return parent::err($message, $extra);
+    }
+
+    /**
+     * Log an exception triggered by ZF2 for administrative purposes.
+     *
+     * @param Throwable          $error
+     * @param array|\Traversable $extra
+     *
+     * @return static
+     * @throws \Zend\Log\Exception\InvalidArgumentException
+     * @throws \Zend\Log\Exception\InvalidArgumentException
+     * @throws \Zend\Log\Exception\RuntimeException
+     */
+    public function exception(Throwable $error, $extra = [])
     {
         // We need to build a variety of pieces so we can supply information at five different verbosity levels:
         $messages   = $error->getMessage();
@@ -66,9 +89,11 @@ class Logger extends ZendLogger
                 }
 
                 if (!empty($line['args'])) {
-                    $args = [];
+                    /** @var array $lineArgs */
+                    $lineArgs = $line['args'];
+                    $args     = [];
 
-                    foreach ($line['args'] as $i => $arg) {
+                    foreach ($lineArgs as $i => $arg) {
                         $args[] = $i . ' ->' . $this->typeToString($arg);
                     }
 
@@ -89,7 +114,7 @@ class Logger extends ZendLogger
             3 => $messages . $serverInfo . $backtrace
         ];
 
-        $this->log(self::CRIT, $errorDetails);
+        $this->log(self::ERR, $errorDetails, $extra);
 
         return $this;
     }
@@ -139,7 +164,7 @@ class Logger extends ZendLogger
                 $types[] = sprintf('%s => %s', $key, $this->typeToString($item));
             }
 
-            return 'array(' . implode(', ', $types) . ')';
+            return 'Array(' . implode(', ', $types) . ')';
         }
 
         if (is_bool($type)) {
