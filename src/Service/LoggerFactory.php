@@ -73,7 +73,7 @@ class LoggerFactory extends AbstractFactory
         }
 
         if ($this->hasOption('writers')) {
-            $this->addWriters($this->getOption('writers', false));
+            $this->addWriters($container, $this->getOption('writers', false));
         }
 
         if ($this->getLogger()->getWriters()->count() === 0) {
@@ -111,12 +111,15 @@ class LoggerFactory extends AbstractFactory
     /**
      *
      *
-     * @param array $writers
+     * @param ContainerInterface $container
+     * @param array              $writers
      *
      * @return void
+     * @throws \Interop\Container\Exception\ContainerException
+     * @throws \Interop\Container\Exception\NotFoundException
      * @throws \Zend\Log\Exception\InvalidArgumentException
      */
-    protected function addWriters(array $writers)
+    protected function addWriters(ContainerInterface $container, array $writers)
     {
         foreach ($writers as $writer) {
             if (array_key_exists('enable', $writer) && !$writer['enable']) {
@@ -125,7 +128,7 @@ class LoggerFactory extends AbstractFactory
 
             unset($writer['enable']);
 
-            $writerAdapter = $this->getWriterAdapter($writer);
+            $writerAdapter = $this->getWriterAdapter($container, $writer);
 
             $this->getLogger()->addWriter($writerAdapter);
         }
@@ -134,17 +137,25 @@ class LoggerFactory extends AbstractFactory
     /**
      *
      *
-     * @param array $writer
+     * @param ContainerInterface $container
+     * @param array              $writer
      *
      * @return WriterInterface
+     * @throws \Interop\Container\Exception\ContainerException
+     * @throws \Interop\Container\Exception\NotFoundException
      * @throws \Zend\Log\Exception\InvalidArgumentException
      */
-    protected function getWriterAdapter(array $writer)
+    protected function getWriterAdapter(ContainerInterface $container, array $writer)
     {
         $writerClass = $writer['adapter'];
 
-        /** @var $writerAdapter \Zend\Log\Writer\WriterInterface */
-        $writerAdapter = new $writerClass($writer['options']['output']);
+        if ($container->has($writerClass)) {
+            /** @var $writerAdapter \Zend\Log\Writer\WriterInterface */
+            $writerAdapter = $container->get($writerClass);
+        } else {
+            /** @var $writerAdapter \Zend\Log\Writer\WriterInterface */
+            $writerAdapter = new $writerClass($writer['options']['output']);
+        }
 
         $writerAdapter->addFilter(new Priority($writer['filter']));
 
