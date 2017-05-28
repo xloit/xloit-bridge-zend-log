@@ -17,6 +17,7 @@
 
 namespace Xloit\Bridge\Zend\Log\Formatter;
 
+use DateTime;
 use Zend\Log\Formatter\FormatterInterface as ZendFormatterInterface;
 
 /**
@@ -33,5 +34,5 @@ interface FormatterInterface extends ZendFormatterInterface
      *
      * @var string
      */
-    const DEFAULT_DATETIME_FORMAT = 'Y-m-d H:i:s';
+    const DEFAULT_DATETIME_FORMAT = DateTime::ATOM;
 }
