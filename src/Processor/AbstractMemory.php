@@ -30,14 +30,14 @@ abstract class AbstractMemory implements ProcessorInterface
     /**
      *
      *
-     * @var boolean
+     * @var bool
      */
     protected $realUsage = true;
 
     /**
      * Constructor to prevent {@link AbstractMemory} from being loaded more than once.
      *
-     * @param boolean $realUsage
+     * @param bool $realUsage
      */
     public function __construct($realUsage = true)
     {
@@ -47,7 +47,7 @@ abstract class AbstractMemory implements ProcessorInterface
     /**
      * Formats bytes into a human readable string.
      *
-     * @param  int $bytes
+     * @param int $bytes
      *
      * @return string
      */
@@ -57,7 +57,9 @@ abstract class AbstractMemory implements ProcessorInterface
 
         if ($bytes > 1024 * 1024) {
             return round($bytes / 1024 / 1024, 2) . ' MB';
-        } elseif ($bytes > 1024) {
+        }
+
+        if ($bytes > 1024) {
             return round($bytes / 1024, 2) . ' KB';
         }
 

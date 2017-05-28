@@ -69,7 +69,7 @@ abstract class AbstractFormatter extends Base implements FormatterInterface
     /**
      * Formats data to be written by the writer.
      *
-     * @param array $event event data
+     * @param array $event An event data.
      *
      * @return array
      */

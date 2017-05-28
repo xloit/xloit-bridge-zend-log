@@ -14,6 +14,7 @@
  * @link      http://xloit.com
  * @copyright Copyright (c) 2016, Xloit. All rights reserved.
  */
+
 namespace Xloit\Bridge\Zend\Log;
 
 use Throwable;
@@ -33,7 +34,7 @@ interface LoggerInterface extends ZendLoggerInterface
      * @param mixed              $message
      * @param array|\Traversable $extra
      *
-     * @return static
+     * @return $this
      */
     public function log($priority, $message, $extra = []);
 
@@ -43,7 +44,7 @@ interface LoggerInterface extends ZendLoggerInterface
      * @param Throwable          $error
      * @param array|\Traversable $extra
      *
-     * @return static
+     * @return $this
      */
     public function exception(Throwable $error, $extra = []);
 }

@@ -28,9 +28,9 @@ class Json extends AbstractFormatter
     /**
      * Formats data to be written by the writer.
      *
-     * @param array $event event data
+     * @param array $event An event data.
      *
-     * @return array
+     * @return string
      */
     public function format($event)
     {

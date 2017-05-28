@@ -20,6 +20,7 @@ namespace Xloit\Bridge\Zend\Log\Service;
 use Xloit\Bridge\Zend\Log\LoggerAwareInterface;
 use Xloit\Bridge\Zend\ServiceManager\AbstractServiceInitializer;
 use Zend\Log\LoggerInterface;
+use Zend\Log\Logger;
 
 /**
  * A {@link LoggerAwareInitializer} class.
@@ -57,7 +58,7 @@ class LoggerAwareInitializer extends AbstractServiceInitializer
     {
         return [
             'xloit.log.logger',
-            'Zend\Log\Logger',
+            Logger::class,
             'Logger'
         ];
     }

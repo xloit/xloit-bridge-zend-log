@@ -31,7 +31,6 @@ interface LoggerAwareInterface extends BaseLoggerAwareInterface
      *
      *
      * @return LoggerInterface
-     * @throws \Zend\Log\Exception\InvalidArgumentException
      */
     public function getLogger();
 }

@@ -29,7 +29,7 @@ class PsrLogMessage implements ProcessorInterface
     /**
      * Processes a log message before it is given to the writers.
      *
-     * @param  array $event
+     * @param array $event
      *
      * @return array
      */

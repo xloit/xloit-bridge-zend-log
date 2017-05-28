@@ -41,15 +41,15 @@ class LoggerFactory extends AbstractFactory
     /**
      * Create the instance service (v3).
      *
-     * @param  ContainerInterface $container
-     * @param  string             $name
-     * @param  null|array         $options
+     * @param ContainerInterface $container
+     * @param string             $name
+     * @param null|array         $options
      *
      * @return Logger
-     * @throws \Interop\Container\Exception\NotFoundException
-     * @throws \Xloit\Std\Exception\RuntimeException
+     * @throws \Psr\Container\ContainerExceptionInterface
+     * @throws \Psr\Container\NotFoundExceptionInterface
      * @throws \Xloit\Bridge\Zend\ServiceManager\Exception\StateException
-     * @throws \Interop\Container\Exception\ContainerException
+     * @throws \Xloit\Std\Exception\RuntimeException
      * @throws \Zend\Log\Exception\InvalidArgumentException
      */
     public function __invoke(ContainerInterface $container, $name, array $options = null)
@@ -115,8 +115,8 @@ class LoggerFactory extends AbstractFactory
      * @param array              $writers
      *
      * @return void
-     * @throws \Interop\Container\Exception\ContainerException
-     * @throws \Interop\Container\Exception\NotFoundException
+     * @throws \Psr\Container\ContainerExceptionInterface
+     * @throws \Psr\Container\NotFoundExceptionInterface
      * @throws \Zend\Log\Exception\InvalidArgumentException
      */
     protected function addWriters(ContainerInterface $container, array $writers)
@@ -141,8 +141,8 @@ class LoggerFactory extends AbstractFactory
      * @param array              $writer
      *
      * @return WriterInterface
-     * @throws \Interop\Container\Exception\ContainerException
-     * @throws \Interop\Container\Exception\NotFoundException
+     * @throws \Psr\Container\ContainerExceptionInterface
+     * @throws \Psr\Container\NotFoundExceptionInterface
      * @throws \Zend\Log\Exception\InvalidArgumentException
      */
     protected function getWriterAdapter(ContainerInterface $container, array $writer)

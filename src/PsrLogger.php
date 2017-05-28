@@ -14,6 +14,7 @@
  * @link      http://xloit.com
  * @copyright Copyright (c) 2016, Xloit. All rights reserved.
  */
+
 namespace Xloit\Bridge\Zend\Log;
 
 use Zend\Log\PsrLoggerAdapter;

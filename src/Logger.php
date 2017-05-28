@@ -34,7 +34,7 @@ class Logger extends ZendLogger implements LoggerInterface
      * @param string             $message
      * @param array|\Traversable $extra
      *
-     * @return static
+     * @return $this
      * @throws \Zend\Log\Exception\InvalidArgumentException
      * @throws \Zend\Log\Exception\InvalidArgumentException
      * @throws \Zend\Log\Exception\RuntimeException
@@ -55,7 +55,7 @@ class Logger extends ZendLogger implements LoggerInterface
      * @param Throwable          $error
      * @param array|\Traversable $extra
      *
-     * @return static
+     * @return $this
      * @throws \Zend\Log\Exception\InvalidArgumentException
      * @throws \Zend\Log\Exception\InvalidArgumentException
      * @throws \Zend\Log\Exception\RuntimeException

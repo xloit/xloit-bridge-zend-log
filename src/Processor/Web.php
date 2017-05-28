@@ -38,9 +38,9 @@ class Web implements ProcessorInterface
     /**
      * Constructor to prevent {@link Web} from being loaded more than once.
      *
-     * @param Traversable|array $serverData array or Traversable that provides access to the $_SERVER data
+     * @param Traversable|array $serverData An array or Traversable that provides access to the $_SERVER data.
      *
-     * @throws Exception\UnexpectedValueException
+     * @throws \Xloit\Bridge\Zend\Log\Exception\UnexpectedValueException
      */
     public function __construct($serverData = null)
     {
@@ -68,7 +68,7 @@ class Web implements ProcessorInterface
      *
      * @param Traversable|array $serverData
      *
-     * @return static
+     * @return $this
      */
     public function setServerData($serverData)
     {
@@ -80,7 +80,7 @@ class Web implements ProcessorInterface
     /**
      * Processes a log message before it is given to the writers.
      *
-     * @param  array $event
+     * @param array $event
      *
      * @return array
      */

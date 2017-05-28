@@ -30,7 +30,7 @@ class Log
     /**
      *
      *
-     * @var boolean
+     * @var bool
      */
     protected static $registeredExceptionHandler = false;
 
@@ -48,7 +48,7 @@ class Log
      * @param string $logVerbosity
      *
      * @return void
-     * @throws Exception\UnexpectedValueException
+     * @throws \Xloit\Bridge\Zend\Log\Exception\UnexpectedValueException
      */
     public static function init(Logger $log, $logVerbosity = 'NOTICE')
     {
@@ -119,8 +119,7 @@ class Log
      * @param string       $title
      * @param PhpException $e
      *
-     * @return boolean
-     * @throws \Zend\Log\Exception\InvalidArgumentException
+     * @return bool
      * @throws \Zend\Log\Exception\InvalidArgumentException
      * @throws \Zend\Log\Exception\RuntimeException
      */
@@ -141,7 +140,8 @@ class Log
      *
      * @param string $message
      * @param array  $extras
-     * @throws \Zend\Log\Exception\InvalidArgumentException
+     *
+     * @return void
      * @throws \Zend\Log\Exception\InvalidArgumentException
      * @throws \Zend\Log\Exception\RuntimeException
      */
@@ -262,9 +262,9 @@ class Log
      *
      * @param Logger $logger
      *
-     * @return boolean
-     * @throws \Zend\Log\Exception\RuntimeException
+     * @return bool
      * @throws \Zend\Log\Exception\InvalidArgumentException
+     * @throws \Zend\Log\Exception\RuntimeException
      */
     public static function registerExceptionHandler(Logger $logger = null)
     {
